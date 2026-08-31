@@ -1,0 +1,97 @@
+POST http://localhost:3000/api/services
+Content-Type: application/json
+
+  {
+    "name": "Decoração",
+    "description": "Escolha a decoração para sua festa, e nós a montamos.",
+    "price": 1400,
+    "image": "https://images.unsplash.com/photo-1478146059778-26028b07395a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=892&q=80"
+  }
+
+
+###
+GET http://localhost:3000/api/services
+
+
+
+###
+GET http://localhost:3000/api/services/6a7dc40409957e5a37c2aa48
+
+
+###
+DELETE http://localhost:3000/api/services/6a7ca6d0221cb3c30355eedb
+
+###
+PUT http://localhost:3000/api/services/6a7dc40409957e5a37c2aa48
+Content-Type: application/json
+
+{
+    "name": "Algum serviço 02 - editado",
+    "description": "Alguma descrição 02",
+    "price": 4000,
+    "image": "https://images.unsplash.com/photo-1656450552703-83ea08a43263?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+}
+
+###
+POST http://localhost:3000/api/parties
+Content-Type: application/json 
+
+{
+            "title": "Meu evento 02",
+            "description": "Primeira festa",
+            "author": "Vitória",
+            "budget": 15000,
+            "image": "https://images.unsplash.com/photo-1531956531700-dc0ee0f1f9a5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "services": [ 
+                            {
+                             "name": "Algum serviço 04",
+                             "description": "Alguma descrição 03",
+                             "price": 10000,
+                             "image": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                             },
+
+                            {
+                             "name": "Algum serviço 04",
+                             "description": "Alguma descrição 04",
+                             "price": 7000,
+                             "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                             }
+                        ]
+}
+
+###
+GET http://localhost:3000/api/parties
+
+###
+GET http://localhost:3000/api/parties/6a82ea40e10945d09ce7e52f
+
+
+###
+DELETE http://localhost:3000/api/parties/6a82efc10e58b79585d5786d
+
+###
+PUT http://localhost:3000/api/parties/6a82efb40e58b79585d5786a
+Content-Type: application/json 
+
+{
+            "title": "Meu evento 02 - EDITADO",
+            "description": "Primeira festa",
+            "author": "Vitória",
+            "budget": 15000,
+            "image": "https://images.unsplash.com/photo-1531956531700-dc0ee0f1f9a5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "services": [ 
+                            {
+                             "name": "Algum serviço 03",
+                             "description": "Alguma descrição 03",
+                             "price": 5000,
+                             "image": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                             },
+
+                            {
+                             "name": "Algum serviço 04",
+                             "description": "Alguma descrição 04",
+                             "price": 7000,
+                             "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                             }
+                        ]
+}

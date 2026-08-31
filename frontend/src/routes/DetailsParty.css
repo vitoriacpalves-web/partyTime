@@ -1,0 +1,40 @@
+.container-party{
+  display: flex;
+  flex-direction: row;
+  gap:40px;
+  padding: 40px 4rem;
+}
+
+.container-party img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.details-party{
+  width: 50%;
+}
+
+.party-seccion {
+  margin-top: 6rem;
+}
+
+.details-party h1,
+.details-party h3,
+.details-party p {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.actions-container{
+    display:flex;
+    justify-content: left;
+    align-items: center;
+    gap:1rem;
+    margin-bottom: 1rem;
+}
+
+.container-party .services-container{
+  padding: 0;
+} 

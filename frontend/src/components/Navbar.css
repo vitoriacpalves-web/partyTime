@@ -1,0 +1,22 @@
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  background-color: rgb(238, 238, 238);
+  width: 100%;
+}
+
+#navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+#navbar h2 {
+  color: #7703fc;
+  font-weight: 900;
+}

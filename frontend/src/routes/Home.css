@@ -1,0 +1,47 @@
+.home{
+  margin: 6rem auto 0;
+  color:rgb(46, 46, 46);
+  max-width: 1840px;
+}
+
+.home h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
+  font-size: 40px;
+  color:rgb(78, 78, 78);
+}
+
+.parties-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:left;
+  align-items: baseline;
+  gap: 4rem;
+  padding: 0 4rem;
+  margin-bottom: 40px;
+}
+
+.parties-container p {
+  text-align: center;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.parties-container .party {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.parties-container .party img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.parties-container .btn-secondary {
+  max-width: 120px;
+  text-align: center;
+}
