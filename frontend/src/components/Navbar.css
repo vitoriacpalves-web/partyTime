@@ -13,10 +13,29 @@
 #navbar ul {
   list-style: none;
   display: flex;
+  gap: 5rem;
+}
+
+#navbar ul div{
+  display: flex;
+  flex-direction: row;
   gap: 1rem;
 }
 
 #navbar h2 {
   color: #7703fc;
   font-weight: 900;
+}
+
+.logout-btn{
+  border:none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+
+.logout-btn:hover{
+  border:none;
+  background-color: transparent;
+  color:#7703fc;
 }

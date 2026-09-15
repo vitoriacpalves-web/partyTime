@@ -1,3 +1,18 @@
+## login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+"user": "user",
+"password": "123456"
+}
+
+### logout
+POST http://localhost:3000/api/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzg5MDQyMTIwLCJleHAiOjE3ODkwNDkzMjB9.vkMyMTIhPQomm-_EzmQ96OEhjuANfHGcxluR5n4_1e0
+
+###
+
 POST http://localhost:3000/api/services
 Content-Type: application/json
 
@@ -61,6 +76,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/parties
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzg5MDQyMTIwLCJleHAiOjE3ODkwNDkzMjB9.vkMyMTIhPQomm-_EzmQ96OEhjuANfHGcxluR5n4_1e0
 
 ###
 GET http://localhost:3000/api/parties/6a82ea40e10945d09ce7e52f

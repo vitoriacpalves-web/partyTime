@@ -2,30 +2,57 @@ import React from 'react'
 import "./Home.css"
 import { Link } from 'react-router-dom'
 
+//status message
+import useToast from "../hooks/useToast"
+
 
 // api
 import partyFetch from '../axios/config'
 
 //hooks
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //features
 import FormatDateTime from '../components/formatDateTime'
 import Search from '../components/Search'
 
+//mui Materials
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Home = () => {
+
+  const navigate = useNavigate();
+  const toast = useToast();
 
   const [parties, setParties] = useState(null);
   const [titleSearch, setTitleSearch] = useState(null);
   const [searchResult, setSearchResult] = useState(null);
   const [dateOrder, setDateOrder] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // evitar que a página seja renderizada antes de carregar as festas
 
-  //load pasties
+
+  //load pasties and check if user is logged in
   useEffect(() => {
     const loadParties = async () => {
-      const response = await partyFetch.get("/parties");
 
-      setParties(response.data);
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/");
+        return; // termina a execução da função se não houver token
+      }
+
+      try {
+        const response = await partyFetch.get("/parties");
+        setParties(response.data);
+        setIsLoading(false); // define isLoading como false após carregar as festas
+
+      } catch (error) {
+
+        navigate("/");
+
+        toast("Não foi possível carregar as festas!", error.response?.data?.msg ?? "Erro desconhecido");
+      }
     };
 
     loadParties()
@@ -44,7 +71,7 @@ const Home = () => {
 
   }
 
-  if (!parties) return <p>Carregando...</p>
+  if (!parties) return <CircularProgress sx={{ color: "#7703fc" }} />
 
 
 
@@ -82,33 +109,40 @@ const Home = () => {
   const listToShow = searchResult || orderedParties;
 
   return (
-    <div className="home">
+    <>
+      {isLoading ? (
+        < CircularProgress sx={{color:"#7703fc"}} />
+      ) : (
+        <div className='home'>
+          <h2>Suas Festas</h2>
 
-      <h2>Suas Festas</h2>
+          <Search
+            titleSearch={titleSearch}
+            setTitleSearch={setTitleSearch}
+            searchParty={searchParty}
+            resetSearch={resetSearch}
+            dateOrder={dateOrder}
+            handleChangeDateOrder={handleChangeDateOrder}
+          />
 
-      <Search
-        titleSearch={titleSearch}
-        setTitleSearch={setTitleSearch}
-        searchParty={searchParty}
-        resetSearch={resetSearch}
-        dateOrder={dateOrder}
-        handleChangeDateOrder={handleChangeDateOrder}
-      />
-
-      <div className='parties-container'>
-        {listToShow.length === 0 && (<p>Não há festas cadastradas</p>)}
-        {listToShow.map((party) => (
-          <div className="party" key={party._id}>
-            <img src={party.image} alt={party.title} />
-            <h3>{party.title}</h3>
-            <p>Data de criação: {FormatDateTime(party.createdAt)}</p>
-            <Link className='btn-secondary' to={`/party/${party._id}`} >
-              Detalhes
-            </Link>
+          <div className='parties-container'>
+            {listToShow.length === 0 && (<p>Não há festas cadastradas</p>)}
+            {listToShow.map((party) => (
+              <div className="party" key={party._id}>
+                <img src={party.image} alt={party.title} />
+                <h3>{party.title}</h3>
+                <p>Data de criação: {FormatDateTime(party.createdAt)}</p>
+                <Link className='btn-secondary' to={`/party/${party._id}`} >
+                  Detalhes
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      )}
+
+    </>
+
   )
 }
 

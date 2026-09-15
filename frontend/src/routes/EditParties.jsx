@@ -22,6 +22,7 @@ const EditParty = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
+  const toast = useToast();
 
 
   //load Services
@@ -76,13 +77,13 @@ const EditParty = () => {
 
         navigate(`/party/${id}`);
 
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useToast(response.data.msg)
+
+        toast(response.data.msg)
       }
 
     } catch (error) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useToast(error.response.data.msg, "error")
+
+      toast(error.response?.data?.msg ?? "Erro desconhecido", "error")
     }
   };
 
@@ -135,6 +136,7 @@ const EditParty = () => {
           </span>
           <input
             type="text"
+            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
             placeholder="Quando você vai investir"
             required
             onChange={(e) => setParty({ ...party, budget: e.target.value })}

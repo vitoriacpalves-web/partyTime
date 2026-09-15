@@ -8,5 +8,9 @@ router.use("/", servicesRouter);
 const partiesRouter = require("./parties")
 router.use("/", partiesRouter);
 
+//login
+const loginRouter = require("./login")
+router.use("/", loginRouter)
+
 
 module.exports = router;

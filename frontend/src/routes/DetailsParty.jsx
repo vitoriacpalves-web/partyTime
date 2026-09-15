@@ -10,11 +10,15 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 //style 
 import "./DetailsParty.css"
 
+//mui Materials
+import CircularProgress from '@mui/material/CircularProgress';
+
 import useToast from "../hooks/useToast"
 
 const DetailsParty = () => {
 
     const navigate = useNavigate();
+    const toast = useToast();
 
     const { id } = useParams();
 
@@ -41,10 +45,10 @@ const DetailsParty = () => {
             const response = await partyFetch.delete(`/parties/${id}`);
 
             if (response.status === 200) {
-                navigate("/")
+                navigate("/home")
 
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                useToast(response.data.msg);
+
+                toast(response.data.msg);
             }
         }
     }
@@ -52,46 +56,49 @@ const DetailsParty = () => {
     return (
         <div className="party-seccion">
 
-            {!party ? (<p> Carregando festa...</p>) : (
-                <div className="container-party">
+            {!party ?
+                (
+                    < CircularProgress sx={{ color: "#7703fc" }} />
+                ) : (
+                    <div className="container-party">
 
-                    <div className="details-party">
-                        <h1>{party.title}</h1>
-                        <div className="actions-container">
-                            <Link to={`/party/edit/${party._id}`} className="btn">
-                                Editar
-                            </Link>
-                            <button
-                                className="btn-secondary"
-                                onClick={handleDelete}
-                            >
-                                Excluir
-                            </button>
+                        <div className="details-party">
+                            <h1>{party.title}</h1>
+                            <div className="actions-container">
+                                <Link to={`/party/edit/${party._id}`} className="btn">
+                                    Editar
+                                </Link>
+                                <button
+                                    className="btn-secondary"
+                                    onClick={handleDelete}
+                                >
+                                    Excluir
+                                </button>
+                            </div>
+                            <p>Orçamento: R${party.budget}</p>
+                            <p>Anfitrião: {party.author}</p>
+                            <p>{party.description}</p>
+                            <h3>
+                                Serviços contratados:
+                            </h3>
+                            <div className="services-container">
+                                {party.services.map((service) => (
+                                    <div className="service" key={service._id}>
+                                        <img src={service.image} alt={service.name} />
+                                        <p>{service.name}</p>
+                                    </div>
+
+                                ))}
+                            </div>
+
+
                         </div>
-                        <p>Orçamento: R${party.budget}</p>
-                        <p>Anfitrião: {party.author}</p>
-                        <p>{party.description}</p>
-                        <h3>
-                            Serviços contratados:
-                        </h3>
-                        <div className="services-container">
-                            {party.services.map((service) => (
-                                <div className="service" key={service._id}>
-                                    <img src={service.image} alt={service.name} />
-                                    <p>{service.name}</p>
-                                </div>
-
-                            ))}
+                        <div className="details-party">
+                            <img src={party.image} alt={party.title} />
                         </div>
-
-
                     </div>
-                    <div className="details-party">
-                        <img src={party.image} alt={party.title} />
-                    </div>
-                </div>
 
-            )}
+                )}
 
         </div>
     )

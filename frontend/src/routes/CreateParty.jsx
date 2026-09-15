@@ -24,6 +24,7 @@ const CreateParty = () => {
   const [partyService, setPartyServices] = useState([]);
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   //load Services
   useEffect(() => {
@@ -53,7 +54,7 @@ const CreateParty = () => {
   }
 
   // create a new party
-  const CreateParty = async (e) => {
+  const Create = async (e) => {
     e.preventDefault();
 
     try {
@@ -67,19 +68,19 @@ const CreateParty = () => {
         services: partyService,
       };
 
-      const response = await partyFetch.post("./parties", partyData);
+      const response = await partyFetch.post("/parties", partyData);
 
       if (response.status === 201) {
-        navigate("/");
+        navigate("/home");
 
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useToast(response.data.msg);
+      
+        toast(response.data.msg);
       }
 
     } catch (error) {
 
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useToast(error.response.data.msg, "error");
+    
+      toast(error.response?.data?.msg ?? "Erro desconhecido");
     }
   };
 
@@ -89,7 +90,7 @@ const CreateParty = () => {
       <div className="form-page">
         <h2>Crie sua próxima Festa</h2>
         <p>Defina o seu orçamento e escolha os serviços</p>
-        <form onSubmit={(e) => CreateParty(e)}>
+        <form onSubmit={(e) => Create(e)}>
           <label>
             <span>
               Nome da festa:
@@ -132,6 +133,7 @@ const CreateParty = () => {
             </span>
             <input
               type="text"
+              onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '' )}
               placeholder="Quando você vai investir"
               required
               onChange={(e) => setBudget(e.target.value)}
